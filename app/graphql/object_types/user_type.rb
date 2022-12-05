@@ -9,8 +9,14 @@ module ObjectTypes
 
     field :posts, [ObjectTypes::PostType], null: false
 
+    # def posts
+    #   Loaders::AssociationLoader.for(::User, :posts).load(object)
+    # end
+
     def posts
-      Loaders::AssociationLoader.for(::User, :posts).load(object)
+      Loaders::AssociationLoader.for(::User, :posts).load(object).then do |posts|
+        posts.order(created_at: :desc)
+      end
     end
   end
 end

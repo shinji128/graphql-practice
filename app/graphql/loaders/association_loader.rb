@@ -19,7 +19,6 @@ module Loaders
       super
     end
 
-    # We want to load the associations on all records, even if they have the same id
     def cache_key(record)
       record.object_id
     end
